@@ -14,9 +14,9 @@ function divide(a, b) {
     return a / b;
 }
 
-let first;
-let operator;
-let second;
+let first = '';
+let operator = '';
+let second = '';
 
 function operate(operator, a, b) {
     if (operator === '+') {
@@ -29,5 +29,16 @@ function operate(operator, a, b) {
         return divide(a, b);
     }
 }
+const display = document.querySelector("#display");
+const numButton = document.querySelectorAll(".numeric");
+let displayNumber = document.createElement("span");
 
-console.log(operate('/', 8, 5));
+numButton.forEach((button) => {
+    button.addEventListener("click", () => enterNumber(button.textContent))
+});
+
+function enterNumber(num) {
+    displayNumber.textContent += num;
+    display.appendChild(displayNumber);
+}
+

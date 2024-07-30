@@ -1,36 +1,41 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-
+    background-color: rgb(180, 180, 180);
 }
 
-#name {
-    font-size: 22px;
-    margin-bottom: 10px;
-    align-self: start; 
+#label {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin-right: 10px;
+    margin-bottoM: 8px;
+    align-self: end;
 }
 
 #calculator {
     display: flex;
     flex-direction: column;
-    border: 4px solid orange;
-    border-radius: 12px;
-    background-color: rgb(196, 196, 196);
+    border: 6px solid rgb(17, 17, 17);
+    border-radius:12px;
+    background-color: rgb(44, 44, 44);
     align-items: center;
-    width: 320px;
-    padding: 12px 12px 22px;
+    width: 308px;
+    padding: 8px 2px;
+    margin: 48px auto;
 }
 
 #display {
     box-sizing: border-box;
     border: 4px solid rgb(54, 54, 54);
-    background-color: rgb(184, 190, 184);
+    background-color: rgb(153, 163, 153);
     font-size: 30px;
     width: 300px;
+    height: 50px;
     display: flex;
     justify-content: right;
     align-items: center;
     padding: 4px 10px;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
 }
 
 #container {
@@ -39,13 +44,27 @@ body {
     justify-content: center;
 }
 
+#clear,
 .numeric,
 .operator {
     box-sizing: border-box;
-    border: 2px solid rgb(128, 128, 128);
-    border-radius: 8px;
-    margin: 4px;
+    background-color: rgb(102, 102, 102);
+    border-radius: 18px;
+    margin: 2px;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 22px;
     width: 69px;
     height: 48px;
+}
+
+#clear {
+    background-color: orange;
+}
+
+.operator {
+    background-color: rgb(200, 200, 200);
+}
+
+.numeric {
+    color: rgb(236, 236, 236);
 }

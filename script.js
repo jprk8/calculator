@@ -64,8 +64,10 @@ function enterNumber(num) {
         second = 1; //change second to true to continue making new number without erasing
     }
 
-    displayNumber.textContent += num;
-    display.appendChild(displayNumber);
+    if (displayNumber.textContent.length < 14) {
+        displayNumber.textContent += num;
+        display.appendChild(displayNumber);
+    }
 }
 
 const opButton = document.querySelectorAll(".operator");
@@ -136,6 +138,8 @@ function roundUp(result) {
         decimals = 14 - parts[0].length;
         let number = parseFloat(result);
         return number.toPrecision(decimals);
+    } else if (result.length > 14) {
+        return parseFloat(result).toExponential(7);
     } else {
         return +result;
     }

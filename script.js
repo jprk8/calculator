@@ -35,6 +35,7 @@ let operator = '';
 let second = '';
 let result = '';
 
+
 const display = document.querySelector("#display");
 let displayNumber = document.createElement("span");
 
@@ -43,20 +44,27 @@ numButton.forEach((button) => {
     button.addEventListener("click", () => enterNumber(button.textContent))
 });
 
+let showResult = true;
+
 function enterNumber(num) {
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
 
-    if (display.textContent == '0' || showResult === true) display.textContent = '';
+    //Prevent entering only zeros ('000...')
+    if (display.textContent == '0' && num == '0') return;
 
+    //To start typing new number if current display is the result or an initial value of '0'
+    if (showResult == true && num != '0') {
+        display.textContent = '';
+        showResult = false;
+    }
     if (operator && !second) {
         displayNumber.textContent = '';
         display.textContent = '';
         second = 1; //change second to true to continue making new number without erasing
     }
-    //trying to prevent typing '000'
+
     displayNumber.textContent += num;
     display.appendChild(displayNumber);
-
 }
 
 const opButton = document.querySelectorAll(".operator");
@@ -71,7 +79,9 @@ function enterOperator(btn) {
     });
 
     operator = btn.textContent;
-    //check if there was a first, second, and operator--ready to calculate (check if this is the third parameter in the equation)
+    //If the operator was pressed after just one number, then store to "first"
+    //If there is already a number in "first", then this must be the second time an operator was used --> calculate first two
+    //above logic seems flawed...
     if (!first) {
         first = display.textContent;
     } else if (first) {
@@ -92,7 +102,6 @@ function enterOperator(btn) {
 
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", () => calculate());
-let showResult = false;
 
 function calculate() {
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
@@ -116,6 +125,7 @@ function reset() {
     second = '';
     operator = '';
     displayNumber.textContent = '';
+    showResult = true;
     display.textContent = '0';
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
 }

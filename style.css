@@ -1,8 +1,9 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(143, 143, 143);
 }
 
+#logo,
 #label {
     font-size: 14px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,25 +14,34 @@ body {
     align-self: end;
 }
 
+#logo {
+    align-self: start;
+    margin-left: 10px;
+    color: rgb(190, 190, 190);
+    margin-bottom: 14px;
+    font-size: 12px;
+}
+
 #calculator {
     display: flex;
     flex-direction: column;
-    border: 6px solid rgb(17, 17, 17);
-    border-radius:12px;
-    background-color: rgb(44, 44, 44);
+    border: 8px solid rgb(100, 100, 100);
+    border-radius: 16px;
+    background-color: rgb(32, 32, 32);
     align-items: center;
     width: 308px;
-    padding: 8px 2px;
+    padding: 16px 8px;
     margin: 48px auto;
+    box-shadow: 22px 22px 8px rgb(68, 68, 68);
 }
 
 #display {
     box-sizing: border-box;
-    border: 4px solid rgb(54, 54, 54);
-    background-color: rgb(138, 150, 138);
+    border: 6px solid rgb(124, 90, 42);
+    background-color: rgb(96, 110, 96);
     font-size: 30px;
-    width: 300px;
-    height: 50px;
+    width: 290px;
+    height: 52px;
     display: flex;
     justify-content: right;
     align-items: center;

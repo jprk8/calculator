@@ -23,7 +23,7 @@ function operate(operator, a, b) {
         return multiply(a, b);
     } else if (operator === '/') {
         if (b == 0) {
-            console.log("NOPE");
+            return "NOT WORTHY";
         } else {
             return divide(a, b);
         }
@@ -47,13 +47,16 @@ function enterNumber(num) {
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
 
     if (display.textContent == '0' || showResult === true) display.textContent = '';
+
     if (operator && !second) {
         displayNumber.textContent = '';
         display.textContent = '';
         second = 1; //change second to true to continue making new number without erasing
     }
+    //trying to prevent typing '000'
     displayNumber.textContent += num;
     display.appendChild(displayNumber);
+
 }
 
 const opButton = document.querySelectorAll(".operator");
@@ -66,13 +69,24 @@ function enterOperator(btn) {
         if (button.textContent == btn.textContent) button.style.borderColor = "red";
         else button.style.borderColor = "rgb(158, 158, 158)";
     });
+
     operator = btn.textContent;
-    first = display.textContent;
-    if (second) {
+    //check if there was a first, second, and operator--ready to calculate (check if this is the third parameter in the equation)
+    if (!first) {
+        first = display.textContent;
+    } else if (first) {
         second = display.textContent;
         let result = operate(operator, +first, +second);
         display.textContent = result;
         first = display.textContent;
+        second = '';
+    //can this be deleted?
+    } else if (operator && !showResult) {
+        let result = operate(operator, +first, +display.textContent);
+        display.textContent = result;
+        displayNumber.textContent = '';
+        first = result;
+        second = '';
     }
 }
 
@@ -86,7 +100,7 @@ function calculate() {
         second = display.textContent;
         let result = operate(operator, +first, +second);
         display.textContent = result;
-        first = result;
+        first = '';
         second = '';
         operator = '';
         displayNumber.textContent = ''; //this is for creating new number to show in display

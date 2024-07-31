@@ -47,7 +47,9 @@ numButton.forEach((button) => {
 let showResult = true;
 
 function enterNumber(num) {
-    opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
+    opButton.forEach((button) => {
+        button.style.backgroundColor = "rgb(200, 200, 200)";
+    });
 
     //Prevent entering only zeros ('000...')
     if (display.textContent == '0' && num == '0') return;
@@ -77,8 +79,12 @@ opButton.forEach((button) => {
 
 function enterOperator(btn) {
     opButton.forEach((button) => {
-        if (button.textContent == btn.textContent) button.style.borderColor = "red";
-        else button.style.borderColor = "rgb(158, 158, 158)";
+        if (button.textContent == btn.textContent) {
+            button.style.backgroundColor = "khaki";
+        }
+        else { 
+            button.style.backgroundColor = "rgb(200, 200, 200)";
+        }
     });
 
     operator = btn.textContent;
@@ -133,9 +139,9 @@ function reset() {
 //Takes string for parsing between decimal to determine decimal places
 //screen can take up to 14 digits (dot excluded)
 function roundUp(result) {
-    if (+result != Math.floor(+result)) {
+    if (+result != Math.floor(+result) && result.length > 14) {
         let parts = result.split(".");
-        decimals = 14 - parts[0].length;
+        decimals = 13 - parts[0].length;
         let number = parseFloat(result);
         return number.toPrecision(decimals);
     } else if (result.length > 14) {

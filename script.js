@@ -112,8 +112,12 @@ function calculate() {
     if (first && display.textContent && operator) {
         second = display.textContent;
         let result = operate(operator, +first, +second).toString();
-        let roundedResult = roundUp(result);
-        display.textContent = roundedResult;
+
+        if (result != "NOT WORTHY") {
+            let roundedResult = roundUp(result);
+            display.textContent = roundedResult;
+        } else display.textContent = result;
+
         first = '';
         second = '';
         operator = '';

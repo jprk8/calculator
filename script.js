@@ -57,6 +57,7 @@ function enterNumber(num) {
         display.textContent = '';
         showResult = false;
     }
+    //IF an operator was used, clear display for entering second number
     if (operator && !second) {
         displayNumber.textContent = '';
         display.textContent = '';
@@ -79,23 +80,18 @@ function enterOperator(btn) {
     });
 
     operator = btn.textContent;
-    //If the operator was pressed after just one number, then store to "first"
-    //If there is already a number in "first", then this must be the second time an operator was used --> calculate first two
-    //above logic seems flawed...
+    //IF the operator was pressed after just one number,
+    //  SET "first" to the display text
+    //IF there is already a number stored in "first"
+    //  CALC first two and display result (this must be the second time an operator was used)
     if (!first) {
         first = display.textContent;
     } else if (first) {
         second = display.textContent;
-        let result = operate(operator, +first, +second);
-        display.textContent = result;
+        let result = operate(operator, +first, +second).toString();
+        let roundedResult = roundUp(result);
+        display.textContent = roundedResult;
         first = display.textContent;
-        second = '';
-    //can this be deleted?
-    } else if (operator && !showResult) {
-        let result = operate(operator, +first, +display.textContent);
-        display.textContent = result;
-        displayNumber.textContent = '';
-        first = result;
         second = '';
     }
 }
@@ -107,8 +103,9 @@ function calculate() {
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
     if (first && display.textContent && operator) {
         second = display.textContent;
-        let result = operate(operator, +first, +second);
-        display.textContent = result;
+        let result = operate(operator, +first, +second).toString();
+        let roundedResult = roundUp(result);
+        display.textContent = roundedResult;
         first = '';
         second = '';
         operator = '';
@@ -128,4 +125,18 @@ function reset() {
     showResult = true;
     display.textContent = '0';
     opButton.forEach((button) => button.style.borderColor = "rgb(158, 158, 158)");
+}
+
+//This function will round up decimal results up to 14 characters to match screen size
+//Takes string for parsing between decimal to determine decimal places
+//screen can take up to 14 digits (dot excluded)
+function roundUp(result) {
+    if (+result != Math.floor(+result)) {
+        let parts = result.split(".");
+        decimals = 14 - parts[0].length;
+        let number = parseFloat(result);
+        return number.toPrecision(decimals);
+    } else {
+        return +result;
+    }
 }
